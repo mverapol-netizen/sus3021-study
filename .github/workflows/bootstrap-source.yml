@@ -26,12 +26,11 @@ jobs:
           unzip -q /tmp/SUS3021Study_GitHubReady.zip -d /tmp/sus3021-import
           test -d /tmp/sus3021-import/SUS3021Study_GitHubReady
 
-      - name: Import project source
+      - name: Import project source without workflow files
         shell: bash
         run: |
-          rsync -a /tmp/sus3021-import/SUS3021Study_GitHubReady/ ./
+          rsync -a --exclude='.github/workflows/android-build.yml' /tmp/sus3021-import/SUS3021Study_GitHubReady/ ./
           rm -rf .bootstrap
-          rm -f .github/workflows/bootstrap-source.yml
 
       - name: Commit imported source
         shell: bash
