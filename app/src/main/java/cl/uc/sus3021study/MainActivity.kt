@@ -2444,7 +2444,7 @@ fun IntensivePrepScreen(progressStore: ProgressStore, refreshTick: Int, onExit: 
     var localRefresh by remember { mutableIntStateOf(0) }
     val questions = CourseRepository.questions
     val calendar = remember(refreshTick, localRefresh) {
-        IntensivePrepRepository.calendar(questions) { id -> progressStore.questionProgress(id) }
+        IntensivePrepRepository.calendar(questions, progress = { id -> progressStore.questionProgress(id) })
     }
     val attempts = remember(refreshTick, localRefresh) { progressStore.examAttempts(20) }
     val patterns = remember(refreshTick, localRefresh) {
